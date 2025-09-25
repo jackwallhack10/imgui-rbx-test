@@ -1409,6 +1409,7 @@ local library library = {
         content.ImageTransparency = options.transparency
         layer.ImageTransparency = options.transparency
         shadow.ImageTransparency = 0.6 * (options.transparency + 1)
+        shadow.Visible = false
 
         expand.MouseButton1Click:Connect(function()
             if self.isopen then
@@ -1827,9 +1828,7 @@ local library library = {
                     end
 
                     function colorCache.update_layers(y)
-                        colorPicker:FindFirstChild("Shadow").Position = UDim2.new(0, options.shadow, 0, options.shadow)
-                        colorPicker:FindFirstChild("Shadow").Size = UDim2.new(1, 0, 0, y)
-                        colorPicker:FindFirstChild("Shadow").SliceScale = options.rounding / 100
+                        colorPicker:FindFirstChild("Shadow").Visible = false
                         colorPicker:FindFirstChild("Layer").Size = UDim2.new(1, 0, 0, y)
                         colorPicker:FindFirstChild("Layer").SliceScale = options.rounding / 100
                     end colorCache.update_layers(colorPicker.AbsoluteSize.Y + colorPicker:FindFirstChild("Content").AbsoluteSize.Y)
@@ -2051,9 +2050,7 @@ local library library = {
                     end
 
                     function dropdownCache.update_layers(y)
-                        dropdownWindow:FindFirstChild("Shadow").Position = UDim2.new(0, options.shadow, 0, options.shadow)
-                        dropdownWindow:FindFirstChild("Shadow").Size = UDim2.new(1, 0, 0, y)
-                        dropdownWindow:FindFirstChild("Shadow").SliceScale = options.rounding / 100
+                        dropdownWindow:FindFirstChild("Shadow").Visible = false
                         dropdownWindow:FindFirstChild("Layer").Size = UDim2.new(1, 0, 0, y)
                         dropdownWindow:FindFirstChild("Layer").SliceScale = options.rounding / 100
                     end dropdownCache.update_layers(dropdownWindow.AbsoluteSize.Y + dropdownWindow:FindFirstChild("Content").AbsoluteSize.Y)
