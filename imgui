@@ -1122,6 +1122,7 @@ local ScreenGuiCache = ScreenGui:FindFirstChild("Cache")
 
 local colorpicking = false
 local sliding = false
+local resizing = false
 
 local event = { } do
     function event.new()
@@ -1429,6 +1430,38 @@ local library library = {
         content.ImageColor3 = options.boardcolor
         content.Size = UDim2.new(1, 0, 0, options.size.Y)
         content.SliceScale = options.rounding / 100
+
+        -- resize handle (bottom-right)
+        local resizeHandle = Instance.new("ImageButton")
+        resizeHandle.Name = "ResizeHandle"
+        resizeHandle.BackgroundTransparency = 1
+        resizeHandle.Size = UDim2.new(0, 16, 0, 16)
+        resizeHandle.AnchorPoint = Vector2.new(1, 1)
+        resizeHandle.Position = UDim2.new(1, -6, 1, -6)
+        resizeHandle.Image = "rbxassetid://7671465363"
+        resizeHandle.ImageColor3 = options.color
+        resizeHandle.Rotation = 45
+        resizeHandle.ZIndex = 5
+        resizeHandle.Parent = content
+
+        local function beginResize()
+            if (not colorpicking) and (not sliding) and (not resizing) and findBrowsingTopMost() == main then
+                resizing = true
+                local minWidth = 200
+                local minContentHeight = 120
+                while mouse.held do
+                    local p = getMouse()
+                    local newWidth = math.max(minWidth, p.X - main.AbsolutePosition.X)
+                    local newContentHeight = math.max(minContentHeight, p.Y - content.AbsolutePosition.Y)
+                    resize(main, { Size = UDim2.new(0, newWidth, 0, main.Size.Y.Offset) }, options.animation)
+                    resize(content, { Size = UDim2.new(1, 0, 0, newContentHeight) }, options.animation)
+                    RunService.Heartbeat:Wait()
+                end
+                resizing = false
+            end
+        end
+
+        resizeHandle.MouseButton1Down:Connect(beginResize)
 
         function cache.update_layers(y)
             shadow.Position = UDim2.new(0, options.shadow, 0, options.shadow)
