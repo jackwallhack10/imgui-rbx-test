@@ -209,7 +209,8 @@ do -- Load items
     Items_2.Position = UDim2.new(0, 10, 0, 0)
     Items_2.Size = UDim2.new(1, -20, 1, 0)
     Items_2.CanvasSize = UDim2.new(0, 0, 0, 0)
-    Items_2.ScrollBarThickness = 6
+    Items_2.ScrollBarThickness = 10
+    Items_2.ScrollBarImageColor3 = Color3.fromRGB(98, 0, 168)
 
     UIListLayout_2.Parent = Items_2
     UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
@@ -323,19 +324,19 @@ do -- Load items
     Tabs.BorderSizePixel = 0
     Tabs.ClipsDescendants = true
     Tabs.Position = UDim2.new(0, 0, 0, 22)
-    Tabs.Size = UDim2.new(1, 0, 0, 28)
+    Tabs.Size = UDim2.new(1, 0, 0, 36)
 
     Items_3.Name = "Items"
     Items_3.Parent = Tabs
     Items_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Items_3.BackgroundTransparency = 1.000
-    Items_3.Position = UDim2.new(0, 15, 0, 0)
-    Items_3.Size = UDim2.new(1, -15, 1, -2)
+    Items_3.Position = UDim2.new(0, 12, 0, 0)
+    Items_3.Size = UDim2.new(1, -12, 1, -2)
 
     UIListLayout_3.Parent = Items_3
     UIListLayout_3.FillDirection = Enum.FillDirection.Horizontal
     UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
-    UIListLayout_3.Padding = UDim.new(0, 15)
+    UIListLayout_3.Padding = UDim.new(0, 18)
 
     Frame_4.Parent = Tabs
     Frame_4.BackgroundColor3 = Color3.fromRGB(59, 59, 68)
@@ -985,22 +986,22 @@ do -- Load items
     Indicator.Parent = Palette
     Indicator.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Indicator.BackgroundTransparency = 1.000
-    Indicator.Size = UDim2.new(0, 5, 0, 5)
+    Indicator.Size = UDim2.new(0, 10, 0, 10)
     Indicator.Image = "rbxassetid://2851926732"
 
     Saturation.Name = "Saturation"
     Saturation.Parent = Content_3
     Saturation.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Saturation.BackgroundTransparency = 1.000
-    Saturation.Position = UDim2.new(1, -25, 0, 10)
-    Saturation.Size = UDim2.new(0, 15, 1, -45)
+    Saturation.Position = UDim2.new(1, -28, 0, 10)
+    Saturation.Size = UDim2.new(0, 18, 1, -45)
     Saturation.Image = "rbxassetid://3641079629"
 
     Indicator_2.Name = "Indicator"
     Indicator_2.Parent = Saturation
     Indicator_2.BackgroundColor3 = Color3.fromRGB(49, 88, 146)
     Indicator_2.BorderSizePixel = 0
-    Indicator_2.Size = UDim2.new(1, 0, 0, 2)
+    Indicator_2.Size = UDim2.new(1, 0, 0, 3)
 
     FinalColor.Name = "FinalColor"
     FinalColor.Parent = Content_3
@@ -1038,13 +1039,37 @@ do -- Load items
     TextLabel.Parent = Content_3
     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TextLabel.BackgroundTransparency = 1.000
-    TextLabel.Position = UDim2.new(0, 10, 1, -35)
-    TextLabel.Size = UDim2.new(1, -10, 0, 35)
+    TextLabel.Position = UDim2.new(0, 10, 1, -54)
+    TextLabel.Size = UDim2.new(1, -10, 0, 16)
     TextLabel.Font = Enum.Font.Code
     TextLabel.Text = "Selected:"
     TextLabel.TextColor3 = Color3.fromRGB(178, 178, 178)
     TextLabel.TextSize = 12.000
     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    local HexValue = Instance.new("TextLabel")
+    HexValue.Name = "HexValue"
+    HexValue.Parent = Content_3
+    HexValue.BackgroundTransparency = 1
+    HexValue.Position = UDim2.new(0, 10, 1, -36)
+    HexValue.Size = UDim2.new(0.5, -10, 0, 16)
+    HexValue.Font = Enum.Font.Code
+    HexValue.Text = "#6200A8"
+    HexValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+    HexValue.TextSize = 12
+    HexValue.TextXAlignment = Enum.TextXAlignment.Left
+
+    local RGBValue = Instance.new("TextLabel")
+    RGBValue.Name = "RGBValue"
+    RGBValue.Parent = Content_3
+    RGBValue.BackgroundTransparency = 1
+    RGBValue.Position = UDim2.new(0.5, 0, 1, -36)
+    RGBValue.Size = UDim2.new(0.5, -10, 0, 16)
+    RGBValue.Font = Enum.Font.Code
+    RGBValue.Text = "rgb(98, 0, 168)"
+    RGBValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+    RGBValue.TextSize = 12
+    RGBValue.TextXAlignment = Enum.TextXAlignment.Left
 
     Dropdown.Name = "Dropdown"
     Dropdown.Parent = Presets
@@ -1394,7 +1419,7 @@ local library library = {
             transparency = 0.2,
             color = Color3.fromRGB(98, 0, 168),
             boardcolor = Color3.fromRGB(21, 22, 23),
-            rounding = 5,
+            rounding = 12,
             animation = 0.1,
             position = UDim2.new(0, 627, 0, 257),
         }).handle(options)
@@ -1488,8 +1513,9 @@ local library library = {
             local tabbuttons = tabs:FindFirstChild("Items")
             tabbutton.Parent = tabbuttons
             tabbutton.Text = tabOptions.text
-            tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X, 1, 0)
+            tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X + 8, 1, 0)
             tabbutton.TextColor3 = Color3.new(0.4, 0.4, 0.4)
+            tabbutton.AutoButtonColor = false
             tabbutton.MouseButton1Click:Connect(function()
                 self.show()
             end)
@@ -1528,7 +1554,7 @@ local library library = {
                 end
             end
 
-            items.ScrollBarImageColor3 = Color3.new()
+            items.ScrollBarImageColor3 = Color3.fromRGB(98, 0, 168)
             items.ChildAdded:Connect(updateCanvas)
             items.ChildRemoved:Connect(updateCanvas)
 
@@ -1577,7 +1603,7 @@ local library library = {
                     local button = new("Button")
                     button.Parent = items
                     button.Text = buttonOptions.text
-                    button.Size = UDim2.new(0, button.TextBounds.X + 20, 0, 20)
+                    button.Size = UDim2.new(0, button.TextBounds.X + 28, 0, 28)
                     button.MouseButton1Click:Connect(function()
                         if not self.eventBlock then
                             self.event:Fire()
@@ -1638,7 +1664,7 @@ local library library = {
                     layer.SliceScale = switchOptions.rounding / 100
 
                     text:GetPropertyChangedSignal("Text"):Connect(function()
-                        switch.Size = UDim2.new(0, 28 + text.TextBounds.X, 0, 20)
+                        switch.Size = UDim2.new(0, 32 + text.TextBounds.X, 0, 24)
                     end)
 
                     text.Text = switchOptions.text
@@ -1728,9 +1754,9 @@ local library library = {
                     end
 
                     text.Text = sliderOptions.text
-                    outer.Size = UDim2.new(0, sliderOptions.size, 0, 20)
-                    text.Position = UDim2.new(0, sliderOptions.size + 8, 0, 0)
-                    slider.Size = UDim2.new(0, sliderOptions.size + 8 + text.TextBounds.X, 0, 20)
+                    outer.Size = UDim2.new(0, sliderOptions.size, 0, 24)
+                    text.Position = UDim2.new(0, sliderOptions.size + 10, 0, 2)
+                    slider.Size = UDim2.new(0, sliderOptions.size + 10 + text.TextBounds.X, 0, 24)
 
                     local function set(p)
                         resize(_slider, { Position = UDim2.new(p, -2.5, 0, 0) }, sliderOptions.animation)
@@ -1945,8 +1971,8 @@ local library library = {
                                         h = 1 - v1
                                         s = 1 - v2
 
-                                        local sv1 = math.clamp(v1, 0, (palette.AbsoluteSize.X - 6) / palette.AbsoluteSize.X)
-                                        local sv2 = math.clamp(v2, 0, (palette.AbsoluteSize.Y - 6) / palette.AbsoluteSize.Y)
+                                        local sv1 = math.clamp(v1, 0, (palette.AbsoluteSize.X - 10) / palette.AbsoluteSize.X)
+                                        local sv2 = math.clamp(v2, 0, (palette.AbsoluteSize.Y - 10) / palette.AbsoluteSize.Y)
                                         resize(paletteIndicator, { Position = UDim2.new(sv1, 0, sv2, 0) }, options.animation)
 
                                         update()
@@ -1963,7 +1989,7 @@ local library library = {
                                         local v1 = x1 / saturation.AbsoluteSize.Y
                                         v = 1 - v1
 
-                                        local sv1 = math.clamp(v1, 0, (palette.AbsoluteSize.Y - 2) / palette.AbsoluteSize.Y)
+                                        local sv1 = math.clamp(v1, 0, (palette.AbsoluteSize.Y - 3) / palette.AbsoluteSize.Y)
                                         resize(saturationIndicator, { Position = UDim2.new(0, 0, sv1, 0) }, options.animation)
 
                                         update()
@@ -1983,12 +2009,24 @@ local library library = {
                             s = s2
                             v = v2
 
-                            local hx = math.clamp(1 - h, 0, (palette.AbsoluteSize.X - 6) / palette.AbsoluteSize.X)
-                            local sx = math.clamp(1 - s, 0, (palette.AbsoluteSize.Y - 6) / palette.AbsoluteSize.Y)
-                            local vx = math.clamp(1 - v, 0, (saturation.AbsoluteSize.Y - 2) / saturation.AbsoluteSize.Y)
+                            local hx = math.clamp(1 - h, 0, (palette.AbsoluteSize.X - 10) / palette.AbsoluteSize.X)
+                            local sx = math.clamp(1 - s, 0, (palette.AbsoluteSize.Y - 10) / palette.AbsoluteSize.Y)
+                            local vx = math.clamp(1 - v, 0, (saturation.AbsoluteSize.Y - 3) / saturation.AbsoluteSize.Y)
                             resize(paletteIndicator, { Position = UDim2.new(hx, 0, sx, 0) }, options.animation)
                             resize(saturationIndicator, { Position = UDim2.new(0, 0, vx, 0) }, options.animation)
 
+                            -- update labels
+                            local c = color
+                            local r = math.floor(c.R * 255 + 0.5)
+                            local g = math.floor(c.G * 255 + 0.5)
+                            local b = math.floor(c.B * 255 + 0.5)
+                            local function tohex(n)
+                                local hex = string.format("%02X", n)
+                                return hex
+                            end
+                            local hex = string.format("#%s%s%s", tohex(r), tohex(g), tohex(b))
+                            content:FindFirstChild("HexValue").Text = hex
+                            content:FindFirstChild("RGBValue").Text = string.format("rgb(%d, %d, %d)", r, g, b)
                             update()
                         end
 
@@ -2056,6 +2094,16 @@ local library library = {
                             self.open()
                             setTopMost(dropdownWindow)
                         end
+                    end)
+
+                    -- hover/active styling for dropdown button
+                    inner.AutoButtonColor = false
+                    local innerBase = dropdownOptions.color
+                    inner.MouseEnter:Connect(function()
+                        resize(inner, { ImageColor3 = bleach(innerBase) }, 0.05)
+                    end)
+                    inner.MouseLeave:Connect(function()
+                        resize(inner, { ImageColor3 = innerBase }, 0.05)
                     end)
 
                     dropdownWindow:FindFirstChild("Expand").MouseButton1Click:Connect(function()
@@ -2466,7 +2514,15 @@ local library library = {
                         v.Visible = false
                     end
                 end
-                resize(tabbutton, { TextColor3 = Color3.new(1, 1, 1) }, options.animation)
+                resize(tabbutton, { TextColor3 = Color3.fromRGB(255, 255, 255) }, options.animation)
+                local underline = tabbutton:FindFirstChild("Underline") or Instance.new("Frame")
+                underline.Name = "Underline"
+                underline.BorderSizePixel = 0
+                underline.BackgroundColor3 = Color3.fromRGB(98, 0, 168)
+                underline.Parent = tabbutton
+                underline.ZIndex = 5
+                underline.Position = UDim2.new(0, 0, 1, -2)
+                underline.Size = UDim2.new(1, 0, 0, 2)
                 tab.Visible = true
             end
 
