@@ -1388,14 +1388,14 @@ local library library = {
 
         options = settings.new({
             text = "New Window",
-            size = Vector2.new(300, 200),
+            size = Vector2.new(477, 409),
             shadow = 10,
             transparency = 0.2,
             color = Color3.fromRGB(75, 10, 120),
             boardcolor = Color3.fromRGB(21, 22, 23),
             rounding = 5,
             animation = 0.1,
-            position = UDim2.new(0, 100, 0, 100),
+            position = UDim2.new(0, 627, 0, 257),
         }).handle(options)
 
         local main = new("Main") main.Parent = ScreenGui
