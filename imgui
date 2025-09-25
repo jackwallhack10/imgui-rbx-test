@@ -252,7 +252,7 @@ do -- Load items
     Content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Content.BackgroundTransparency = 1.000
     Content.ClipsDescendants = true
-    Content.Position = UDim2.new(0, 0, 1, 0)
+    Content.Position = UDim2.new(0, 0, 0, 22 + Tabs.Size.Y.Offset)
     Content.Size = UDim2.new(1, 0, 0, 200)
     Content.Image = "rbxassetid://3570695787"
     Content.ImageColor3 = Color3.fromRGB(21, 22, 23)
@@ -322,7 +322,7 @@ do -- Load items
     Tabs.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
     Tabs.BorderSizePixel = 0
     Tabs.ClipsDescendants = true
-    Tabs.Position = UDim2.new(0, 0, 1, 2)
+    Tabs.Position = UDim2.new(0, 0, 0, 22)
     Tabs.Size = UDim2.new(1, 0, 0, 28)
 
     Items_3.Name = "Items"
@@ -1445,7 +1445,7 @@ local library library = {
         resizeHandle.Parent = content
 
         local function beginResize()
-            if (not colorpicking) and (not sliding) and (not resizing) and findBrowsingTopMost() == main then
+            if (not colorpicking) and (not sliding) and (not resizing) then
                 resizing = true
                 local minWidth = 200
                 local minContentHeight = 120
@@ -1462,6 +1462,9 @@ local library library = {
         end
 
         resizeHandle.MouseButton1Down:Connect(beginResize)
+        mouse.InputEnded:Connect(function()
+            if resizing then resizing = false end
+        end)
 
         function cache.update_layers(y)
             shadow.Position = UDim2.new(0, options.shadow, 0, options.shadow)
